@@ -44,7 +44,7 @@ public class WidgetObject
         return this._driver.findElement(_locator);
     }
 
-    public void click ()
+    public void click () //some comment
     {
         this.element().click();
     }
