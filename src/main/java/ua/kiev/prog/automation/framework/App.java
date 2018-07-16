@@ -23,7 +23,7 @@ public class App
     }*/
 
 
-    static public void setUpChromeDriver ()
+    static public void main ()
     {
         String propertyName = "webdriver.chrome.driver";
          String propertyValue = "C:\\chromedriver_win32\\chromedriver.exe";

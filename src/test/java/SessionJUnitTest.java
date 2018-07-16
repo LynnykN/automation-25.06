@@ -10,7 +10,7 @@ public class SessionJUnitTest extends Assert {
     public void setup ()
     {
         // Устанавливаем системную переменную для хром-драйвера, если она еще не установлена
-        App.setUpChromeDriver();
+        App.main();
     }
 
     @Test
