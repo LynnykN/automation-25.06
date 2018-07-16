@@ -11,20 +11,23 @@ public class App
         return _standalone;
     }
 
-  /*  static public void main(String[] args)
+    static public void setUpChromeDriver()
+    {
+        if (!_standalone) {
+            String propertyName = "webdriver.chrome.driver";
+            String propertyValue = "C:\\chromedriver_win32\\chromedriver.exe";
+            // Если параметер еще не установлен то установить его
+            if (System.getProperty(propertyName) == null)
+                System.setProperty(propertyName, propertyValue);
+        }
+    }
+
+
+    static public void main (String[] args)
     {
         if (args.length > 0 && args[0].equals("standalone"))
             _standalone = true;
 
-        System.setProperty ("webdriver.chrome.driver", "C:\\chromedriver_win32\\chromedriver.exe");
-        ProgKievUa product = new ProgKievUa ();
-        product.forum().setURL("https://prog.kiev.ua/forum");
-        product.runTests();
-    }*/
-
-
-    static public void main ()
-    {
         String propertyName = "webdriver.chrome.driver";
          String propertyValue = "C:\\chromedriver_win32\\chromedriver.exe";
          if (System.getProperty(propertyName) == null)
