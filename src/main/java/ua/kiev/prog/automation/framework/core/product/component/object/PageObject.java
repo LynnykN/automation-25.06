@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import ua.kiev.prog.automation.framework.core.ResultLog;
 import ua.kiev.prog.automation.framework.core.product.Component;
 
 import java.util.List;
@@ -45,6 +46,7 @@ abstract public class PageObject<T extends PageObject>
         } catch (Exception e) { /* Ignore */ }
         // Ждем подтверждения загрузки страниці
         this.waitReadyLocator();
+        ResultLog.getInstance().writePageObject(this);
     }
 
     /**
@@ -108,5 +110,7 @@ abstract public class PageObject<T extends PageObject>
     {
         return this.component().session().driver();
     }
+
+
 
 }

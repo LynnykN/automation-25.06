@@ -4,8 +4,19 @@ import org.junit.Test;
 import ua.kiev.prog.automation.framework.App;
 import ua.kiev.prog.automation.framework.core.product.component.driver.Session;
 
-public class SessionJUnitTest extends Assert {
+/**
+ * ////////////////////////////////////////////////////////// *
+ * Automation Framework                                       *
+ * Automation Course for https://prog.kiev.ua/                *
+ * ---------------------------------------------------------- *
+ * Created by Yurii Voronenko                                 *
+ * Email: yurii.voronenko@gmail.com                           *
+ * ////////////////////////////////////////////////////////// *
+ */
+public class SessionJUnitTest extends Assert
+{
     private String _url = "https://www.google.com.ua/";
+
     @Before
     public void setup ()
     {
@@ -39,7 +50,4 @@ public class SessionJUnitTest extends Assert {
         // Закрываем сессию
         session.close();
     }
-
 }
-
-

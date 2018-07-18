@@ -161,5 +161,10 @@ abstract public class Component
      *
      * @return String - Имя компонента
      */
-    abstract protected String name();
+    abstract public String name();
+
+    final public String getURL ()
+    {
+        return this._url;
+    }
 }

@@ -1,6 +1,7 @@
 package ua.kiev.prog.automation.framework.product.test;
 
 import ua.kiev.prog.automation.framework.core.Test;
+import ua.kiev.prog.automation.framework.core.TestResultType;
 import ua.kiev.prog.automation.framework.core.product.Component;
 import ua.kiev.prog.automation.framework.product.app.progkievua.Forum;
 import ua.kiev.prog.automation.framework.product.app.progkievua.forum.LoginPage;
@@ -12,7 +13,9 @@ import ua.kiev.prog.automation.framework.product.app.progkievua.forum.blocks.Top
 import ua.kiev.prog.automation.framework.product.app.progkievua.forum.dz.*;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * ////////////////////////////////////////////////////////// *
@@ -32,12 +35,15 @@ public class LoginTest extends Test
         return "Login to forum test";
     }
 
-    @Override
-    public void beforeTest()
-    {
-        // Вывод в консоль
-        System.out.println("TEST: " + this.name() + " | PHASE: BEFORE RUN");
-    }
+
+
+        @Override
+        public void beforeTest()
+        {
+            // Вывод в консоль
+            System.out.println("TEST_INFO: " + this.name() + " | PHASE: BEFORE RUN");
+        }
+
 
     @Override
     public void test()
