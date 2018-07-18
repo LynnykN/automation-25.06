@@ -27,11 +27,11 @@ public class App
     {
         if (args.length > 0 && args[0].equals("standalone"))
             _standalone = true;
+        setUpChromeDriver();
+        ProgKievUa product = new ProgKievUa();
+        product.forum().setURL("https://prog.kiev.ua/forum");
+        product.runTests();
 
-        String propertyName = "webdriver.chrome.driver";
-         String propertyValue = "C:\\chromedriver_win32\\chromedriver.exe";
-         if (System.getProperty(propertyName) == null)
-             System.setProperty(propertyName, propertyValue);
     }
 
 

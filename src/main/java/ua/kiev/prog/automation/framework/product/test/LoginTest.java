@@ -29,6 +29,7 @@ import java.util.Map;
 public class LoginTest extends Test
 {
 
+
     @Override
     public String name()
     {
@@ -36,18 +37,37 @@ public class LoginTest extends Test
     }
 
 
+    @Override
+    public void data(List<Map<String, String>> testCases)
+    {
+        Map<String, String> testCase1 = new HashMap<>();
+        testCase1.put("username", "user1");
+        testCase1.put("password", "pass1");
+        testCase1.put("result",   TestResultType.FAILED.toString());
+        testCases.add(testCase1);
 
-        @Override
+        Map<String, String> testCase2 = new HashMap<>();
+        testCase2.put("username", "n.yaroshenko072@gmail.com");
+        testCase2.put("password", "kakulBka");
+        testCase2.put("result",    TestResultType.SUCCESS.toString());
+        testCases.add(testCase2);
+    }
+
+
+    @Override
         public void beforeTest()
         {
             // Вывод в консоль
             System.out.println("TEST_INFO: " + this.name() + " | PHASE: BEFORE RUN");
         }
 
-
     @Override
-    public void test()
-    {
+    public void test(Map<String, String> testCase) {
+
+        String username = testCase.get("username");
+        String password = testCase.get("password");
+        String result   = testCase.get("result");
+
         // Вывод в консоль
         System.out.println("TEST: " + this.name() + " | PHASE: TEST");
 
@@ -56,47 +76,46 @@ public class LoginTest extends Test
         // Переходим на страницу логина
         LoginPage loginPage = mainPage.getLoginPage();
         // Заходим на форум
-        MainPageLoggedIn dashboard = loginPage.login("n.yaroshenko072@gmail.com", "kakulBka");
-        // Подтверждаем что вход осуществлен
-        this.assertSuccess(dashboard, "Login");
-        // Выводим в консоль имя пользователя на форуме
-        System.out.println("Name: " + dashboard.getUsername());
+        MainPageLoggedIn dashboard = loginPage.login(username, password);
+        dashboard.takeScreenshot();
+        this.assertEquals(result, dashboard.getResult());
 
-        //  домашнее задание
-        BoardPage board = dashboard.getBoardPage("QA Automation");
-        TopicPage topic = board.getTopicPage("QA Automation Tetris 14 02 2018");
-        List<String> authors = topic.getAuthors();
-        for (String author : authors) {
-            System.out.println("Author: " + author);
+        if (dashboard.getResult() == TestResultType.SUCCESS)
+        {
+
+            // Выводим в консоль имя пользователя на форуме
+            System.out.println("Name: " + dashboard.getUsername());
+
+            //  домашнее задание
+            BoardPage board = dashboard.getBoardPage("QA Automation");
+            TopicPage topic = board.getTopicPage("QA Automation Tetris 14 02 2018");
+            List<String> authors = topic.getAuthors();
+            for (String author : authors) {
+                System.out.println("Author: " + author);
+            }
+
+
+            UsersPage users = topic.topLinks().getUsers();
+            UserWidget user =  users.findUser("Alejandro");
+            System.out.println(user.getRegistrationDate());
+
+
+            /*  TopLinksBlock topLinksBlock = dashboard.topLinks();
+            HelpPage helpPage = topLinksBlock.getHelp();
+            UsersPage usersPage = topLinksBlock.getUsers();
+            SearchPage searchPage = topLinksBlock.getSearch();
+            SearchPage dashboard1 = searchPage.search("test");*/
+
+
+            // Ждём 10 сек, с перехватом исключения на прерывание выполнения потока и игнорируем его
+            try {
+                Thread.sleep(10000);
+            } catch (InterruptedException e) { /* Игнорируем */ }
         }
-
-
-        UsersPage users = topic.topLinks().getUsers();
-        UserWidget user =  users.findUser("Alejandro");
-        System.out.println(user.getRegistrationDate());
-
-
-      /*  TopLinksBlock topLinksBlock = dashboard.topLinks();
-        HelpPage helpPage = topLinksBlock.getHelp();
-        UsersPage usersPage = topLinksBlock.getUsers();
-        SearchPage searchPage = topLinksBlock.getSearch();
-        SearchPage dashboard1 = searchPage.search("test");*/
-
-
-
-
-
-
-
-
-
-
-        // Ждём 10 сек, с перехватом исключения на прерывание выполнения потока и игнорируем его
-        try {
-            Thread.sleep(10000);
-        } catch (InterruptedException e) { /* Игнорируем */ }
-
     }
+
+
+
 
     @Override
     public void afterTest()

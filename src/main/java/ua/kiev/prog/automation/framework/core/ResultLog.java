@@ -36,7 +36,7 @@ public class ResultLog
     }
 
     // Переключатель для режима отладки
-    private boolean     _debugLog = false;
+    private boolean     _debugLog = true;
 
     // HTML лог
     private PrintWriter _writer;
